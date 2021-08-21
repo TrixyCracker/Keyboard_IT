@@ -1,0 +1,3 @@
+INTL layout ->	!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_àbcdefghijklmnopqrstuvwxyz{|}
+ITA layout  ->  !°£$%/à)=(^,'.-0123456789çò;ì:_"ABCDEFGHIJKLMNOPQRSTUVWXYZèù+&?\abcdefghijklmnopqrstuvwxyzé§*|	
+The first char is space
