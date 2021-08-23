@@ -85,7 +85,7 @@ void Keyboard_::sendReport(KeyReport* keys)
 #define SHIFT 	0x200
 #define ALT 	0x400
 #define ALTGR 	CONTROL|ALT
-const uint16_t _asciimap[128] PROGMEM =
+const uint16_t _asciimap[128] =
 {
 	0x00,           		// NUL
 	0x00,           		// SOH
@@ -228,12 +228,12 @@ uint8_t USBPutChar(uint8_t c);
 size_t Keyboard_::press(uint16_t k) 
 {
 	uint8_t i;
-	/*if (k >= 136) {			// it's a non-printing key (not a modifier)
+	if (k >= 136) {			// it's a non-printing key (not a modifier)
 		k = k - 136;
 	} else if (k >= 128) {	// it's a modifier key
 		_keyReport.modifiers |= (1<<(k-128));
 		k = 0;
-	} else {*/				// it's a printing key
+	} else {				// it's a printing key
 		k = _asciimap[k];
 		if (!k) {
 			setWriteError();
@@ -248,7 +248,7 @@ size_t Keyboard_::press(uint16_t k)
 			_keyReport.modifiers |= 0x04;
 
 		k &= 0x7F;
-	//}
+	}
 	
 	// Add k to the key report only if it's not already present
 	// and if there is an empty slot.
@@ -268,10 +268,6 @@ size_t Keyboard_::press(uint16_t k)
 		}	
 	}
 
-	Serial.print("MOD : ");
-	Serial.print(_keyReport.modifiers, HEX);
-	Serial.print(" - KEY : ");
-	Serial.println(_keyReport.keys[0], HEX);
 	sendReport(&_keyReport);
 	return 1;
 }
@@ -282,12 +278,12 @@ size_t Keyboard_::press(uint16_t k)
 size_t Keyboard_::release(uint16_t k) 
 {
 	uint8_t i;
-	/*if (k >= 136) {			// it's a non-printing key (not a modifier)
+	if (k >= 136) {			// it's a non-printing key (not a modifier)
 		k = k - 136;
 	} else if (k >= 128) {	// it's a modifier key
 		_keyReport.modifiers &= ~(1<<(k-128));
 		k = 0;
-	} else {	*/			// it's a printing key
+	} else {				// it's a printing key
 		k =  _asciimap[k];
 		if (!k) {
 			return 0;
@@ -301,7 +297,7 @@ size_t Keyboard_::release(uint16_t k)
 			_keyReport.modifiers &= ~0x04;
 
 		k &= 0x7F;
-	//}
+	}
 	
 	// Test the key report to see if k is present.  Clear it if it exists.
 	// Check all positions in case the key is present more than once (which it shouldn't be)
